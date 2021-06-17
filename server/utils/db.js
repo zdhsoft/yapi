@@ -21,10 +21,10 @@ function connect(callback) {
   let config = yapi.WEBCONFIG;
   let options = {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true};
 
-  if (config.db.user) {
-    options.user = config.db.user;
-    options.pass = config.db.pass;
-  }
+//   if (config.db.user) {
+//     options.user = config.db.user;
+//     options.pass = config.db.pass;
+//   }
 
   options = Object.assign({}, options, config.db.options)
 
@@ -39,7 +39,15 @@ function connect(callback) {
     }
   }
 
-  let db = mongoose.connect(
+  // console.log(`DB:${connectString}, options:${JSON.stringify(options)}`);
+  yapi.commons.log(`DB:${connectString}, options:${JSON.stringify(options)}`);
+//   let db = mongoose.createConnection(connectString, options, (err)=>{
+//       if (err) {
+//         yapi.commons.log(err + ', mongodb Authentication failed', 'error');
+//       }
+//   });
+
+  mongoose.connect(
     connectString,
     options,
     function(err) {
@@ -48,6 +56,9 @@ function connect(callback) {
       }
     }
   );
+  //await mongoose.connect(connURL, option);
+  const db =  mongoose.connection;
+
 
   db.then(
     function() {

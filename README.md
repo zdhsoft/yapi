@@ -32,8 +32,8 @@ YApi 是<strong>高效</strong>、<strong>易用</strong>、<strong>功能强大
 使用我们提供的 yapi-cli 工具，部署 YApi 平台是非常容易的。执行 yapi server 启动可视化部署程序，输入相应的配置和点击开始部署，就能完成整个网站的部署。部署完成之后，可按照提示信息，执行 node/{网站路径/server/app.js} 启动服务器。在浏览器打开指定url, 点击登录输入您刚才设置的管理员邮箱，默认密码为 ymfe.org 登录系统（默认密码可在个人中心修改）。
 
     npm install -g yapi-cli --registry https://registry.npm.taobao.org
-    yapi server 
-    
+    yapi server
+
 #### 服务管理
 利用pm2方便服务管理维护。
 
@@ -46,12 +46,12 @@ YApi 是<strong>高效</strong>、<strong>易用</strong>、<strong>功能强大
 
 #### 升级
 升级项目版本是非常容易的，并且不会影响已有的项目数据，只会同步 vendors 目录下的源码文件。
-    
+
     cd  {项目目录}
     yapi ls //查看版本号列表
     yapi update //更新到最新版本
     yapi update -v {Version} //更新到指定版本
-    
+
 ### 教程
 * [使用 YApi 管理 API 文档，测试， mock](https://juejin.im/post/5acc879f6fb9a028c42e8822)
 * [自动更新 Swagger 接口数据到 YApi 平台](https://juejin.im/post/5af500e251882567096140dd)
@@ -89,14 +89,14 @@ YApi 是<strong>高效</strong>、<strong>易用</strong>、<strong>功能强大
 ### YApi 的一些客户
 * 去哪儿
 * 携程
-* 艺龙 
+* 艺龙
 * 美团
 * 百度
 * 腾讯
 * 阿里巴巴
 * 京东
 * 今日头条
-* 唯品支付 
+* 唯品支付
 * 链家网
 * 快手
 * 便利蜂
@@ -115,4 +115,3 @@ YApi 是<strong>高效</strong>、<strong>易用</strong>、<strong>功能强大
 
 ### License
 Apache License 2.0
-
