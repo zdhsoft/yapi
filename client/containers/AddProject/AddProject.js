@@ -52,12 +52,12 @@ class ProjectList extends Component {
     };
   }
   static propTypes = {
-    groupList: PropTypes.array,
-    form: PropTypes.object,
-    currGroup: PropTypes.object,
-    addProject: PropTypes.func,
-    history: PropTypes.object,
-    setBreadcrumb: PropTypes.func,
+    groupList     : PropTypes.array,
+    form          : PropTypes.object,
+    currGroup     : PropTypes.object,
+    addProject    : PropTypes.func,
+    history       : PropTypes.object,
+    setBreadcrumb : PropTypes.func,
     fetchGroupList: PropTypes.func
   };
 
@@ -78,6 +78,7 @@ class ProjectList extends Component {
         values.group_id = values.group;
         values.icon = constants.PROJECT_ICON[0];
         values.color = pickRandomProperty(constants.PROJECT_COLOR);
+        console.log('---Values:' + JSON.stringify(values));
         addProject(values).then(res => {
           if (res.payload.data.errcode == 0) {
             form.resetFields();
@@ -112,6 +113,24 @@ class ProjectList extends Component {
             <FormItem {...formItemLayout} label="项目名称">
               {getFieldDecorator('name', {
                 rules: nameLengthLimit('项目')
+              })(<Input />)}
+            </FormItem>
+
+            <FormItem {...formItemLayout} label="系统id">
+              {getFieldDecorator('system_id', {
+                rules: [ {
+                    required: true,
+                    validator(rule, value, callback) {
+                        const fieldName = '系统id';
+                        const r = /^\d{1,4}$/;
+
+                        if (!r.test(value)) {
+                            callback(`请输入${fieldName}, 系统id是1-9999之间的整数！`);
+                        } else {
+                            return callback();
+                        }
+                    }
+                }]
               })(<Input />)}
             </FormItem>
 
@@ -175,7 +194,6 @@ class ProjectList extends Component {
                 ]
               })(<TextArea rows={4} />)}
             </FormItem>
-
             <FormItem {...formItemLayout} label="权限">
               {getFieldDecorator('project_type', {
                 rules: [

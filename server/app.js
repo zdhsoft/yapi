@@ -27,6 +27,13 @@ app.proxy = true;
 yapi.app = app;
 
 // app.use(bodyParser({multipart: true}));
+app.use(async (ctx, next) => {
+    let url = ctx.url;
+    let dt = Date.now();
+    // console.log("----" + JSON.stringify(ctx, null, 2));
+    await next();
+    console.log(`URL ${url} ${ctx.method} time: ${Date.now() - dt}ms`);
+});
 app.use(koaBody({ multipart: true, jsonLimit: '2mb', formLimit: '1mb', textLimit: '1mb' }));
 app.use(mockServer);
 app.use(router.routes());
@@ -36,12 +43,16 @@ websocket(app);
 
 app.use(async (ctx, next) => {
   if (/^\/(?!api)[a-zA-Z0-9\/\-_]*$/.test(ctx.path)) {
+    let url = ctx.url;
     ctx.path = '/';
+    let dt = Date.now();
     await next();
+    console.log(`URL ${url} ${ctx.method} ${ctx.response.status} time: ${Date.now() - dt}ms`);
   } else {
     await next();
   }
 });
+
 
 app.use(async (ctx, next) => {
   if (ctx.path.indexOf('/prd') === 0) {

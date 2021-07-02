@@ -57,8 +57,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         projectList: action.payload.data.data.list,
-        total: action.payload.data.data.total,
-        userInfo: action.payload.data.data.userinfo
+        total      : action.payload.data.data.total,
+        userInfo   : action.payload.data.data.userinfo
       };
     }
 
@@ -118,8 +118,8 @@ export function fetchProjectList(id, pageNum) {
     payload: axios.get('/api/project/list', {
       params: {
         group_id: id,
-        page: pageNum || 1,
-        limit: variable.PAGE_LIMIT
+        page    : pageNum || 1,
+        limit   : variable.PAGE_LIMIT
       }
     })
   };
@@ -136,7 +136,7 @@ export function copyProjectMsg(params) {
 // 添加项目成员
 export function addMember(param) {
   return {
-    type: ADD_PROJECT_MEMBER,
+    type   : ADD_PROJECT_MEMBER,
     payload: axios.post('/api/project/add_member', param)
   };
 }
@@ -144,7 +144,7 @@ export function addMember(param) {
 // 删除项目成员
 export function delMember(param) {
   return {
-    type: DEL_PROJECT_MEMBER,
+    type   : DEL_PROJECT_MEMBER,
     payload: axios.post('/api/project/del_member', param)
   };
 }
@@ -152,7 +152,7 @@ export function delMember(param) {
 // 修改项目成员权限
 export function changeMemberRole(param) {
   return {
-    type: CHANGE_PROJECT_MEMBER,
+    type   : CHANGE_PROJECT_MEMBER,
     payload: axios.post('/api/project/change_member_role', param)
   };
 }
@@ -192,9 +192,11 @@ export function addProject(data) {
     protocol,
     icon,
     color,
+    system_id,
     project_type
   } = data;
 
+  console.log("------>", JSON.stringify(data, null, 2));
   // 过滤项目名称中有html标签存在的情况
   name = htmlFilter(name);
   const param = {
@@ -202,6 +204,7 @@ export function addProject(data) {
     prd_host,
     protocol,
     basepath,
+    system_id,
     desc,
     group_id,
     group_name,
@@ -214,17 +217,17 @@ export function addProject(data) {
     payload: axios.post('/api/project/add', param)
   };
 }
-
 // 修改项目
 export function updateProject(data) {
-  let { name, project_type, basepath, desc, _id, env, group_id, switch_notice, strice, is_json5, tag } = data;
-  
+  let { name, project_type, basepath, desc, _id, env, group_id, switch_notice, strice, is_json5, tag, system_id } = data;
+
   // 过滤项目名称中有html标签存在的情况
   name = htmlFilter(name);
   const param = {
     name,
     project_type,
     basepath,
+    system_id,
     switch_notice,
     desc,
     id: _id,
