@@ -1,8 +1,8 @@
-const userModel = require('../models/user.js');
-const yapi = require('../yapi.js');
+const userModel      = require('../models/user.js');
+const yapi           = require('../yapi.js');
 const baseController = require('./base.js');
-const common = require('../utils/commons.js');
-const ldap = require('../utils/ldap.js');
+const common         = require('../utils/commons.js');
+const ldap           = require('../utils/ldap.js');
 
 const interfaceModel = require('../models/interface.js');
 const groupModel = require('../models/group.js');
@@ -42,6 +42,12 @@ class userController extends baseController {
     }
 
     let result = await userInst.findByEmail(email);
+
+
+
+    if (result) {
+        yapi.commons.log("passwd:" + yapi.commons.generatePassword(password, result.passsalt));
+    }
 
     if (!result) {
       return (ctx.body = yapi.commons.resReturn(null, 404, '该用户不存在'));

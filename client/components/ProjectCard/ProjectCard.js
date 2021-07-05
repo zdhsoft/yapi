@@ -148,7 +148,7 @@ class ProjectCard extends Component {
                 constants.PROJECT_COLOR[projectData.color] || constants.PROJECT_COLOR.blue
             }}
           />
-          <h4 className="ui-title">{projectData.name || projectData.projectname}</h4>
+          <h4 className="ui-title">{ (projectData.name || projectData.projectname) + "aaaa"}</h4>
         </Card>
         <div
           className="card-btns"

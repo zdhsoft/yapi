@@ -179,7 +179,7 @@ class projectModel extends baseModel {
         return this.model
             .find(params)
             .select(
-                '_id uid name basepath switch_notice desc group_id project_type color icon env add_time up_time'
+                '_id uid name basepath switch_notice desc group_id project_type color icon env add_time up_time system_id'
             )
             .sort({ _id: -1 })
             .exec();
