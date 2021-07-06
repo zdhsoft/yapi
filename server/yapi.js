@@ -6,6 +6,7 @@ const config = require('../../config.json');
 let insts = new Map();
 let mail;
 
+
 const WEBROOT = path.resolve(__dirname, '..'); //路径
 const WEBROOT_SERVER = __dirname;
 const WEBROOT_RUNTIME = path.resolve(__dirname, '../..');
